@@ -122,17 +122,13 @@ UnicodeData.txt
 Blocks.txt
 PropertyValueAliases.txt
 UnicodeData-3.0.0.html
-classify16.g4
+test_Codepoint.g4
 produce both 16 bit (ANTLR) and 21 bit (full21bit) grammars
 test_ASCII.tokens
 Test ordinary lexer
-line 2:6 token recognition error at: '愚'
-line 2:7 token recognition error at: '公'
-line 2:8 token recognition error at: '移'
-line 2:9 token recognition error at: '山'
-line 3:0 missing ID at '<EOF>'
+line 2:6 mismatched input '愚' expecting ID
 [PASS] original: original
-[PASS] original: &lt;missing ID&gt;
+[PASS] original: None
 test_Codepoint.tokens
 Test classify lexer
 [PASS] classify: classify
