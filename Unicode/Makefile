@@ -1,9 +1,9 @@
 #!/usr/bin/env make
 # Makefile for "classify" grammar generator and tests
-# Version 0.0.2
+# Version 0.0.3
 #
 # Author    : Jonathan D. Lettvin (jlettvin@gmail.com)
-# Date      : 20161023
+# Date      : 20161108
 # Legal     : Copyright(c) Jonathan D. Lettvin, All Rights Reserved
 # License   : GPL 3.0
 #
@@ -15,6 +15,9 @@
 #     make version      Display version of this Makefile
 #
 # Description: See README.md
+# This file is used to generate 16 and 21 bit
+# ANTLR4 codepoint classification grammars
+# by extracting data and information from unicode.org root file.
 
 MANIFEST=                       \
 	MANIFEST Makefile README.md \
@@ -61,13 +64,14 @@ version:
 test: $(GRAMMARS)
 	./makeGrammars.py -u
 
+# @rm -f $(SOURCES)
 .PHONY:
 clean:
 	@echo $@
 	@rm -f MANIFEST
 	@$(foreach item, $(MANIFEST), echo $(item) >> MANIFEST;)
 	@echo "Try: @ls -1 | sort MANIFEST MANIFEST - | uniq -u | xargs rm -f"
-	@rm -f $(SOURCES) $(TARGETS) *.pyc local/*
+	@rm -f $(TARGETS) *.pyc local/*
 
 .PHONY:
 UnicodeData.txt:

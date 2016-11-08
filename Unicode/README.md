@@ -1,4 +1,4 @@
-Unicode-3.0.0
+Unicode-9.0.0
 =============
 
 0: Highlights
@@ -45,7 +45,7 @@ Makefile for "classify" grammar generator and tests
 Version 0.0.2
 
 Author    : Jonathan D. Lettvin (jlettvin@gmail.com)
-Date      : 20161023
+Date      : 20161108
 Legal     : Copyright(c) Jonathan D. Lettvin, All Rights Reserved
 License   : GPL 3.0
 
@@ -91,12 +91,21 @@ Concepts:
     A second file (UnicodeData-3.0.0) provides the correct column labels.
     It also provides Abbreviation Descriptions for each codepoint.
 
+    WARNING: Unicode 9.0.0 does not provide clean access to
+    normative names for columns in the file UnicodeData.txt.
+    However, the concepts and contents of the columns
+    have not changed since version 3.0.0 so those column names are used.
+    A suggestion was submitted to unicode.org to provide a new file
+    UnicodeDataColumnNames.txt with suitable naming conventions
+    to be used in future automated parsing of UnicodeData.txt
+    which remains the absolute root of the unicode.org codepoint data.
+
     Enhance (-e) causes additional rules to be moved
     from the file hello.g4 to the file classify.g4 where
     they can be imported into other grammars.
 
 Author  : Jonathan D. Lettvin (jlettvin@gmail.com)
-Date    : 20161023 
+Date    : 20161108 
 Legal   : Copyright(c) Jonathan D. Lettvin, All Rights Reserved
 License : GPL 3.0
 ```
