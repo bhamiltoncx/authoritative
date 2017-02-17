@@ -35,7 +35,7 @@ Concepts:
     they can be imported into other grammars.
 
 Author  : Jonathan D. Lettvin (jlettvin@gmail.com)
-Date    : 20161023 
+Date    : 20161023
 Legal   : Copyright(c) Jonathan D. Lettvin, All Rights Reserved
 License : GPL 3.0
 """
@@ -101,9 +101,8 @@ class Codepoint(dict):
             split2 = [s.strip() for s in split1[0].split(';')]
             if len(split1) == 2:  # There is a rule for the name
                 split3 = [s.strip() for s in split1[1].split('|')]
-                if not self.full21bit:
-                    # Necessary for 16 bit Unicode, not for 21 bit
-                    split3 = [s for s in split3 if s != 'Cn']
+                # XXX there are no Cn codepoints at all
+                split3 = [s for s in split3 if s != 'Cn']
                 self.combinations[split2[1]] = ' | '.join(split3)
             else:  # No rule proposed
                 self.keyName[split2[1]] = split2[-1]
@@ -162,7 +161,7 @@ class Codepoint(dict):
         Collected column names and abbreviations rule columns in this file.
         Codepoint class is in the 2nd "General Category" column.
         """
-        
+
         # Establish instance containers
         self.keys = set()
         self.raw = {}
@@ -278,8 +277,8 @@ Legal:  Copyright(c) Jonathan D. Lettvin, All Rights Reserved
 License:GPL 3.0"""
         if self.full21bit:
             self.bits = 21
-            self.fmt1 = r" '\u%06x'             // %s"
-            self.fmt2 = r" '\u%06x'..'\u%06x'   // %s"
+            self.fmt1 = r" '\u{%04x}'             // %s"
+            self.fmt2 = r" '\u{%04x}'..'\u{%04x}'   // %s"
         else:
             self.bits = 16
             self.fmt1 = r" '\u%04x'             // %s"
@@ -310,23 +309,17 @@ License:GPL 3.0"""
                 self.g4echo('%s%s:     // %s' %(self.prefix, k, self.keyName[k]))
                 for i, p in enumerate(v):
                     sep = rsep[i == 0]
-                    language = "[>010000] "
                     if p[0] == p[1]:
-                        if p[0] < 0x10000:
-                            language = u'['+unichr(p[0])+'] '
-                        language += self.findLanguage(p[0])
+                        language = u'['+unichr(p[0])+'] ' + self.findLanguage(p[0])
                         self.g4echo(sep + self.fmt1 % (p[0], language))
                     else:
-                        if p[0] < 0x10000:
-                            language = u'['+unichr(p[0])+'..'+unichr(p[1])+'] '
-                        language += self.findLanguage(p[0])
+                        language = u'['+unichr(p[0])+'..'+unichr(p[1])+'] ' + self.findLanguage(p[0])
                         self.g4echo(sep + self.fmt2 % (p[0], p[1], language))
                 self.g4echo('\n;', 1)
 
             if self.enhance:
                 self.g4enhance()
-        if not self.full21bit:
-            self.g4hello()
+        self.g4hello()
         return self
 
     def g4enhance(self):
@@ -524,4 +517,3 @@ class BarTest(TestCase):
                 unittest.main()
 
     main()
-

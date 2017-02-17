@@ -5,7 +5,7 @@ Automatically generated Unicode based hello grammar.
 
 grammar      test_Codepoint    ; 
 
-import       classify16; 
+import       classify21; 
 
 prog   : hello * EOF
 ; 

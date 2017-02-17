@@ -25,7 +25,7 @@ MANIFEST=                       \
 	classify16.g4 classify21.g4 \
 	test_Codepoint.py test_Codepoint.g4 test_ASCII.py test_ASCII.g4
 
-FTP=ftp://ftp.unicode.org/Public/
+UNICODE=http://www.unicode.org/Public/
 
 SOURCES=                        \
 	UnicodeData.txt             \
@@ -45,7 +45,7 @@ TARGETS=                                                    \
 	test_ASCIIParser.py         test_CodepointParser.py     \
 	test_ASCIIVisitor.py        test_CodepointVisitor.py
 
-antlr4=java -jar /usr/local/lib/antlr-4.5.3-complete.jar
+antlr4=java -jar local/antlr4-4.6.1-SNAPSHOT-complete.jar
 
 all: test_ASCII.tokens test_ASCII.tokens test_Codepoint.tokens
 	@echo "make finished.  Creating MANIFEST"
@@ -76,22 +76,22 @@ clean:
 .PHONY:
 UnicodeData.txt:
 	@echo $@
-	@wget -q -c -N -Plocal $(FTP)UCD/latest/ucd/$@
+	@wget -q -c -N -Plocal $(UNICODE)UCD/latest/ucd/$@
 
 .PHONY:
 Blocks.txt:
 	@echo $@
-	@wget -q -c -N -Plocal $(FTP)UCD/latest/ucd/$@
+	@wget -q -c -N -Plocal $(UNICODE)UCD/latest/ucd/$@
 
 .PHONY:
 PropertyValueAliases.txt:
 	@echo $@
-	@wget -q -c -N -Plocal $(FTP)UCD/latest/ucd/$@
+	@wget -q -c -N -Plocal $(UNICODE)UCD/latest/ucd/$@
 
 .PHONY:
 UnicodeData-3.0.0.html:
 	@echo $@
-	@wget -q -c -N -Plocal $(FTP)3.0-Update/$@
+	@wget -q -c -N -Plocal $(UNICODE)3.0-Update/$@
 
 test_ASCII.tokens: $(GRAMMARS) test_ASCII.py Makefile
 	@echo $@
